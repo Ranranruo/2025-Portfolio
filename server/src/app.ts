@@ -7,9 +7,8 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
-
+app.use(express.static('public'));
 app.use("/project", projectRouter);
-
 // DB 연결
 mongoose
   .connect(process.env.MONGO_URI!)

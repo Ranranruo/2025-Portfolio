@@ -1,12 +1,15 @@
 import mongoose from "mongoose";
 
-const ProjectSchema = new mongoose.Schema({
-    title: { type: String },
-    description: { type: String },
-    award: { type: String },
-    role: { type: String, required: true },
-    titleImage: { type: String },
-    isMobile: { type: Boolean, required: true },
-    skills: { type: [String] },
-    images: { type: [String] },
+const projectSchema = new mongoose.Schema({
+    name: String,
+    introduction: String,
+    competition: String,
+    award: String,
+    role: String,
+    titleImage: String,
+    slideImages: [String],
+    descriptionImages: [String],
+    skills: [String]
 });
+
+export const Project = mongoose.model('Project', projectSchema);

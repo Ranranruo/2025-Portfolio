@@ -4,7 +4,8 @@ const AddProject = () => {
     return (
         <StyledAddProject>
             <div className="container">
-                </div>       
+                <h1 className="title">New project</h1>
+            </div>       
         </StyledAddProject>
     );
 }

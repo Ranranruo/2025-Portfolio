@@ -23,6 +23,7 @@ export const GRADIENT_BORDER = `
     background-clip: content-box, border-box;
 `;
 export const INNER = `
+    width: 100%;
     max-width: ${INNER_PX};
     padding: 0 ${INNER_PADDING};
     margin: 0 auto;

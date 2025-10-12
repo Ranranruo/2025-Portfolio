@@ -1,6 +1,6 @@
 
 import { EM, SIZE } from "../types/Unit";
-import { COLOR, GAP, TITLE_SIZE } from "../styles/Variable";
+import { COLOR, GAP, GRADIENT_TEXT, TITLE_SIZE } from "../styles/Variable";
 import styled from "@emotion/styled";
 
 const IMG_SIZE: Record<SIZE, EM> = {
@@ -14,10 +14,12 @@ const IMG_SIZE: Record<SIZE, EM> = {
 interface LogoProps {
   children?: string;
   size?: SIZE;
+  color?: 'gradient' | 'black';
 }
 
 interface StyledLogoProps {
   size: SIZE;
+  color: 'gradient' | 'black';
 }
 
 const StyledLogo = styled.a<StyledLogoProps>`
@@ -29,14 +31,20 @@ const StyledLogo = styled.a<StyledLogoProps>`
     font-family: 'Sb';
     font-weight: 900;
     font-size: ${({size}) => TITLE_SIZE[size]}; 
+    ${({color})=>color==='gradient'?GRADIENT_TEXT:''};
   }`;
 
 const Logo = ({
   children = "Portfolio",
-  size = "medium"
+  size = "medium",
+  color = "black"
 }: LogoProps) => {
   return (
-    <StyledLogo href="/" size={size}>
+    <StyledLogo
+      href="/"
+      size={size}
+      color={color}
+      >
       {/* <img src="images/logo.svg" /> */}
       <h1>{children}</h1>
     </StyledLogo>

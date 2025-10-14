@@ -4,9 +4,17 @@ import StyledSlide from "./StyledSlide";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
+interface SlideItem {
+    id: number;
+    image: string;
+    isMobile: boolean;
+}
+
+type SlideGroup = SlideItem[];
+
 const Slide = () => {
     const [x, setX] = useState(0);
-    const [slide, setSlide] = useState(SLIDE);
+    const [slides, setSlides] = useState<SlideGroup[]>(SLIDE);
     const slideRefs = [
         useRef<HTMLLIElement | null>(null), 
         useRef<HTMLLIElement | null>(null),
@@ -21,7 +29,7 @@ const Slide = () => {
         slideRefs.forEach((el, idx) => {
             let info = el.current!.getBoundingClientRect();
             if((el.current!.clientWidth + info.x) - window.innerWidth <= 0) {
-                setSlide(prev => {
+                setSlides(prev => {
                     const newSlide = [...prev]; // 얕은 복사
                     newSlide[idx] = [...newSlide[idx], ...newSlide[idx]]; // 해당 인덱스만 깊은 복사
                     return newSlide;
@@ -38,7 +46,7 @@ const Slide = () => {
                     <h2>A list of projects I’ve worked on</h2>
                 </div>
                 <ul className="container slide">
-                    {slide.map((group, idx) => 
+                    {slides.map((group, idx) => 
                     <motion.li
                         ref={slideRefs[idx]}
                         initial={{left: 0}}
@@ -57,7 +65,6 @@ const Slide = () => {
                     </motion.li>
                     )}
                 </ul>
-
             </div>
         </StyledSlide>
     );

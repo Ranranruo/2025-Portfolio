@@ -55,7 +55,7 @@ const StyledVisual = styled.section<StyledVisualProps>`
                     }
                     > :nth-of-type(2) {
                         > span {
-                            ${GRADIENT_TEXT}
+                            ${GRADIENT_TEXT(1)}
                         }
                         // color: ${COLOR['main01']};
                     }
@@ -87,7 +87,7 @@ const StyledVisual = styled.section<StyledVisualProps>`
                     }
                 }
                 > a:nth-of-type(1) {
-                    ${GRADIENT_BACKGROUND}
+                    ${GRADIENT_BACKGROUND(1)}
                     color: ${COLOR['white01']};
                 }
                 > a:nth-of-type(2) {
@@ -98,7 +98,7 @@ const StyledVisual = styled.section<StyledVisualProps>`
                     color: transparent;
                     padding: 0em;
                     > span {
-                        ${GRADIENT_TEXT}
+                        ${GRADIENT_TEXT(1)}
 
                     }
 

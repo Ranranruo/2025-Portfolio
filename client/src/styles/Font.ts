@@ -37,25 +37,25 @@ const font = css`
   // 비앤빛
   @font-face {
     font-family: 'Bnviit';
-    src: url('font/BnviitLasikOTF.otf');
+    src: url('/font/BnviitLasikOTF.otf');
     font-weight: normal;
     font-style: normal;
   }
   @font-face {
     font-family: 'Sb';
-    src: url('font/sb/SBL.ttf');
+    src: url('/font/sb/SBL.ttf');
     font-weight: 400;
     font-style: normal;
   }
   @font-face {
     font-family: 'Sb';
-    src: url('font/sb/SBM.ttf');
+    src: url('/font/sb/SBM.ttf');
     font-weight: 600;
     font-style: normal;
   }
   @font-face {
     font-family: 'Sb';
-    src: url('font/sb/SBB.ttf');
+    src: url('/font/sb/SBB.ttf');
     font-weight: 900;
     font-style: normal;
   }

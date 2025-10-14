@@ -4,10 +4,10 @@ import { EM, HEX, PX, SIZE } from "../types/Unit";
 export const INNER_PX = "1440px";
 export const INNER_PADDING = "30px";
 
-const GRADIENT = `linear-gradient(120deg, #f6d365 0%, #fda085 100%)`;
-export const GRADIENT_BACKGROUND = `background-image: ${GRADIENT};`;
-export const GRADIENT_TEXT = `
-    ${GRADIENT_BACKGROUND}
+const GRADIENT = (opacity: number) => `linear-gradient(120deg, rgba(246, 211, 101, ${opacity}) 0%, rgba(253, 160, 133, ${opacity}) 100%)`;
+export const GRADIENT_BACKGROUND = (opacity: number) => `background-image: ${GRADIENT(opacity)};`;
+export const GRADIENT_TEXT = (opacity: number) => `
+    ${GRADIENT_BACKGROUND(opacity)}
     background-clip: text;
     -webkit-text-fill-color: transparent;
 `;
@@ -36,7 +36,7 @@ export const COLOR = {
     white01: "#fff",         // 가장 밝음
     white02: "#F9FAFB",
     white03: "#F4F4F6",
-    background01: "#ECECEE",      // 가장 어두운 white 계열
+    background01: "#ECECEE", 
     gray01: "#C1C0BA",       // gray 계열
     black01: "#150F0B",
     backDrop01: "#ffe9d6",

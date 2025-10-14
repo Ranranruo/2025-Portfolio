@@ -33,7 +33,7 @@ const StyledStatistics = styled.section<StyledStatisticsProps>`
                 gap: 3.25em;
                 > .title {
                     font-size: 3.5em;
-                    ${GRADIENT_TEXT}
+                    ${GRADIENT_TEXT(1)}
                 }
                 > .content {
                     word-break: keep-all;

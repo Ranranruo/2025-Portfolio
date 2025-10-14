@@ -1,4 +1,4 @@
-import MainLayout from "../../layouts/main/MainLayout";
+import MainLayout from "../../layouts/MainLayout";
 
 const ProjectPage = () => {
     return (

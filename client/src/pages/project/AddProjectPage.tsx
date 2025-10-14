@@ -1,8 +1,10 @@
 
 import AddProject from "../../components/project/addProject/AddProject";
-import SubLayout from "../../layouts/sub/SubLayout";
+import useBackground from "../../hooks/useBackground";
+import SubLayout from "../../layouts/SubLayout";
 
 const AddProjectPage = () => {
+    useBackground("#fff");
     return (
         <SubLayout>
             <AddProject />

@@ -1,4 +1,4 @@
- import SubHeader from "./SubHeader";
+ import Header from "./header/Header";
 
 
 interface SubLayoutProps {
@@ -8,7 +8,10 @@ interface SubLayoutProps {
 const SubLayout: React.FC<SubLayoutProps> = ({ children }) => {
   return (
     <>
-    <SubHeader />
+    <Header 
+      position="sticky"
+      color="gradient"
+    />
       {children}
     </>
   );

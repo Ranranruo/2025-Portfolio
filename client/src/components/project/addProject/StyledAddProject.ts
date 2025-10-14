@@ -6,13 +6,16 @@ const StyledAddProject = styled.section`
     height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;
-    background: ${COLOR.background01};
     .container {
         ${INNER};
         border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         > .title {
             font-size: ${TITLE_SIZE.large};
+            font-family: 'Sb';
+            font-weight: 400;
         }
     }
 `;

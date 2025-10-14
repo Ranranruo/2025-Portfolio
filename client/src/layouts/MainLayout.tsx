@@ -1,4 +1,4 @@
-import MainHeader from "./MainHeader";
+import Header from "./header/Header";
 
 interface MainLayoutProps {
   children: React.ReactNode;
@@ -7,7 +7,7 @@ interface MainLayoutProps {
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   return (
     <>
-      <MainHeader />
+      <Header />
       {children}
     </>
   );

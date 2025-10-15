@@ -14,10 +14,14 @@ interface ButtonProps {
   children: string;
   size?: SIZE;
   detailSize?: EM | PX;
+  color?: keyof typeof COLOR;
+}
+interface StyledButtonProps {
+  size: SIZE;
+  detailSize?: EM | PX;
   color: keyof typeof COLOR;
 }
-
-const StyledButton = styled.button<ButtonProps>`
+const StyledButton = styled.button<StyledButtonProps>`
   padding: 0.5em 1em;
   cursor: pointer;
   font-weight: 400;

@@ -31,7 +31,7 @@ const StyledLogo = styled.a<StyledLogoProps>`
     font-family: 'Sb';
     font-weight: 900;
     font-size: ${({size}) => TITLE_SIZE[size]}; 
-    ${({color})=>color==='gradient'?GRADIENT_TEXT:''};
+    ${({color})=>color==='gradient'?GRADIENT_TEXT(1):''};
   }`;
 
 const Logo = ({

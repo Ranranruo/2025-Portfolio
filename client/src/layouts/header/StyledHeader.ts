@@ -35,10 +35,7 @@ const StyledHeader = styled.header<StyledHeaderProps>`
                 gap: ${GAP['large']};
                 padding: 1em 1.5em;
                 border-radius: 100px;
-                ${({color}) => color === "gradient" ? GRADIENT_BACKGROUND(0.7) : ""};
-                &:hover {
-                    ${({color}) => color === "gradient" ? GRADIENT_BACKGROUND(0.8) : ""};
-                }
+                ${({color}) => color === "gradient" ? GRADIENT_BACKGROUND(1) : ""};
                 a {
                     font-family: "Sb";
                     font-weight: 400;

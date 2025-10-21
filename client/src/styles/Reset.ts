@@ -26,6 +26,7 @@ const reset = css`
     padding-top: 50px;
     padding-bottom: 50px;
   }
+  label { cursor: pointer; }
 `;
 
 export default reset;

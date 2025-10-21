@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { COLOR, GRADIENT_BACKGROUND, GRADIENT_TEXT, INNER, TITLE_SIZE } from "../../../styles/Variable";
+import { COLOR, GAP, GRADIENT_BACKGROUND, GRADIENT_TEXT, INNER, TITLE_SIZE } from "../../../styles/Variable";
 
 const StyledAddProject = styled.section`
     width: 100%;
@@ -23,15 +23,28 @@ const StyledAddProject = styled.section`
             width: 100%;
             display: flex;
             flex-direction: column;
+            align-items: flex-start;
             > .device {
+                padding: .25em;
+                border-radius: 5px;
+                background: ${COLOR['white03']};
                 display: flex;
                 justify-content: flex-start;
+                gap: ${GAP['verysmall']};
                 > label {
+                    background: ${COLOR['white03']};
+                    border-radius: 5px;
                     padding: 0.5em 1em;
+                }
+                > :not(input:checked) + label:hover {
+                    filter: brightness(.95);
                 }
                 > input:checked + label {
                     ${GRADIENT_BACKGROUND(1)};
                 }
+            }
+            > .title-img {
+                
             }
         }
     }

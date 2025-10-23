@@ -1,4 +1,4 @@
-import { EM, HEX, PX, SIZE } from "../types/Unit";
+import { EM, PX, SIZE } from "../types/Unit";
 
 // inner
 export const INNER_PX = "1440px";

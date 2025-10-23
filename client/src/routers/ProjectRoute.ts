@@ -1,6 +1,5 @@
 import { RouteObject } from "react-router-dom";
 import ProjectPage from "../pages/project/ProjectPage";
-import { Component } from "react";
 import AddProjectPage from "../pages/project/AddProjectPage";
 
 const ProjectRoute: RouteObject[] = [

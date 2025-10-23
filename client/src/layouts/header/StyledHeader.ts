@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { BOX_SHADOW, COLOR, GAP, GRADIENT_BACKGROUND, GRADIENT_TEXT, INNER } from "../../styles/Variable";
+import { COLOR, GAP, GRADIENT_BACKGROUND, GRADIENT_TEXT, INNER } from "../../styles/Variable";
 
 interface StyledHeaderProps {
     position: "fixed" | "sticky";

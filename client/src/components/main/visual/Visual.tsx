@@ -2,7 +2,6 @@ import * as motion from "motion/react-client";
 import { useEffect, useState } from "react";
 import StyledVisual from "./StyledVisual";
 import FadeWriter from "../../motion/FadeWriter";
-import { delay, useAnimation } from "framer-motion";
 import useFlexWrap from "../../../hooks/useFlexWrap";
 
 const backgroundImages = [

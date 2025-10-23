@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { BOX_SHADOW, COLOR, GAP, GRADIENT_BACKGROUND, GRADIENT_TEXT, INNER, TITLE_SIZE } from "../../../styles/Variable";
+import { COLOR, GAP, GRADIENT_BACKGROUND, INNER, TITLE_SIZE } from "../../../styles/Variable";
 
 const StyledAddProject = styled.section`
     width: 100%;

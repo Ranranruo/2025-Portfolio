@@ -1,6 +1,6 @@
 
 import { EM, SIZE } from "../types/Unit";
-import { COLOR, GAP, GRADIENT_TEXT, TITLE_SIZE } from "../styles/Variable";
+import { GAP, GRADIENT_TEXT, TITLE_SIZE } from "../styles/Variable";
 import styled from "@emotion/styled";
 
 const IMG_SIZE: Record<SIZE, EM> = {

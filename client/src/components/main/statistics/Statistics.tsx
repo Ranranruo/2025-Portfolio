@@ -1,4 +1,3 @@
-import { LiaProjectDiagramSolid } from "react-icons/lia";
 import useFlexWrap from "../../../hooks/useFlexWrap";
 import StyledAboutMe from "./StyledStatistics";
 import { STATISTICS } from "./Data";

@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { BOX_SHADOW, COLOR, GRADIENT_TEXT, INNER, TITLE_SIZE } from "../../../styles/Variable";
+import { BOX_SHADOW, COLOR, GRADIENT_TEXT, INNER } from "../../../styles/Variable";
 
 interface StyledStatisticsProps {
     isWrapped: boolean;

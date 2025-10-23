@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useState } from "react";
 import StyledAddProject from "./StyledAddProject";
 import { DEVICE_LIST } from "./Data";
 

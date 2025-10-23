@@ -1,4 +1,4 @@
-import { motion, HTMLMotionProps } from "framer-motion";
+import { motion } from "framer-motion";
 import { SLIDE } from "./Data";
 import StyledSlide from "./StyledSlide";
 import { useEffect, useRef, useState } from "react";

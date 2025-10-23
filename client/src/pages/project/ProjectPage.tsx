@@ -1,10 +1,10 @@
-import MainLayout from "../../layouts/MainLayout";
+// import MainLayout from "../../layouts/MainLayout";
 
 const ProjectPage = () => {
     return (
-        <MainLayout>
-            
-        </MainLayout>
+        // <MainLayout>
+            <></>
+        // </MainLayout>
     );
 }
 export default ProjectPage;

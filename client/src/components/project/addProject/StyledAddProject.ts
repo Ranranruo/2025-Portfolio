@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { COLOR, GAP, GRADIENT_BACKGROUND, GRADIENT_TEXT, INNER, TITLE_SIZE } from "../../../styles/Variable";
+import { BOX_SHADOW, COLOR, GAP, GRADIENT_BACKGROUND, GRADIENT_TEXT, INNER, TITLE_SIZE } from "../../../styles/Variable";
 
 const StyledAddProject = styled.section`
     width: 100%;
@@ -24,8 +24,9 @@ const StyledAddProject = styled.section`
             display: flex;
             flex-direction: column;
             align-items: flex-start;
+            gap: 15px;
             > .device {
-                padding: .25em;
+                padding: .4em;
                 border-radius: 5px;
                 background: ${COLOR['white03']};
                 display: flex;
@@ -44,7 +45,28 @@ const StyledAddProject = styled.section`
                 }
             }
             > .title-img {
-                
+                width: 100%;
+                label { 
+                    display: flex;
+                    width: 100%;
+                    justify-content: center;
+                }
+                img {
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    background-color: ${COLOR['white03']};
+                    padding: .5em;
+                    border-radius: 5px;
+                    height: 776px;
+                    transition: .5s;
+                }
+                img.desktop {
+                    aspect-ratio: 16/9;
+                }
+                img.mobile {
+                    aspect-ratio: 9/16;
+                }
             }
         }
     }

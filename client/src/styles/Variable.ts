@@ -36,12 +36,15 @@ export const COLOR = {
     white01: "#fff",         // 가장 밝음
     white02: "#F9FAFB",
     white03: "#F4F4F6",
-    background01: "#ECECEE", 
+    back01: "#fff", 
+    back02: "rgb(248,249,250)", 
+    back03: "rgb(243, 244, 246)",
     gray01: "#C1C0BA",       // gray 계열
     black01: "#150F0B",
     backDrop01: "#ffe9d6",
-    backDrop02: "#ffe0c9"
-
+    backDrop02: "#ffe0c9",
+    text01: "#111827",
+    text02: "rgb(107, 114, 128)"
 } as const;
 
 

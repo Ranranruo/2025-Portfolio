@@ -10,7 +10,7 @@ const router = createBrowserRouter([
     Component: MainPage
   }, 
   {
-    path: '/project',
+    path: '/projects',
     children: ProjectRoute
   }
 ])

@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { COLOR, CONTENT_SIZE, GRADIENT_BACKGROUND, GRADIENT_BORDER, GRADIENT_TEXT, INNER } from "../../../styles/Variable";
+import { BOX_SHADOW, COLOR, CONTENT_SIZE, GRADIENT_BACKGROUND, GRADIENT_BORDER, GRADIENT_TEXT, INNER } from "../../../styles/Variable";
 
 interface StyledVisualProps {
     isWrapped: boolean;
@@ -17,7 +17,7 @@ const StyledVisual = styled.section<StyledVisualProps>`
         ${COLOR['backDrop01']} 0%, 
         #fff 35%
     );
-        /* ${COLOR['background01']} 40% */
+        /* ${COLOR['back01']} 40% */
     > .container {
         ${INNER}
         width: 100%;
@@ -39,6 +39,7 @@ const StyledVisual = styled.section<StyledVisualProps>`
                 justify-content: center;
                 div:nth-of-type(1) {
                     span {
+                        color: ${COLOR['text01']};
                         font-size: 5em;
                         font-weight: 900;
                     }
@@ -49,6 +50,7 @@ const StyledVisual = styled.section<StyledVisualProps>`
                     gap: 10px 0;
                     > p {
                         > span {
+                            color: ${COLOR['text01']};
                             font-size: 3em;
                             font-weight: 400;
                         }
@@ -74,7 +76,8 @@ const StyledVisual = styled.section<StyledVisualProps>`
                 flex-wrap: wrap;
                 gap: 30px;
                 > a {
-                    box-shadow: rgba(0, 0, 0, .1) 0 0 30px;
+                    ${BOX_SHADOW};
+                    /* box-shadow: rgba(0, 0, 0, .1) 0 0 30px; */
                     display: inline-block;
                     border-radius: 10px;
                     font-size: ${CONTENT_SIZE['large']};

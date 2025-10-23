@@ -8,10 +8,7 @@ interface SubLayoutProps {
 const SubLayout: React.FC<SubLayoutProps> = ({ children }) => {
   return (
     <>
-    <Header 
-      position="sticky"
-      color="gradient"
-    />
+    <Header type="sub"/>
       {children}
     </>
   );

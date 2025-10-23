@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { BOX_SHADOW, GRADIENT_TEXT, TITLE_SIZE } from "../../../styles/Variable";
+import { BOX_SHADOW, COLOR, GRADIENT_TEXT, TITLE_SIZE } from "../../../styles/Variable";
 
 const StyledSlide = styled.section`
         overflow-x: hidden;
@@ -16,6 +16,7 @@ const StyledSlide = styled.section`
             gap: 20px;
             > h1 {
                 font-size: ${TITLE_SIZE['huge']};
+                color: ${COLOR['text01']};
             }
             > h2 {
                 font-weight: lighter;

@@ -4,19 +4,15 @@ import { Link } from "react-router-dom";
 import StyledHeader from "./StyledHeader";
 
 interface HeaderProps {
-    position?: "fixed" | "sticky";
-    color?: "black" | "gradient";
+    type: "main" | "sub";
 }
 
 const Header = ({
-    position = "fixed",
-    color = "black",
+    type
 }: HeaderProps) => {
     return (
         <StyledHeader
-            position={position}
-            color={color}
-            className={color}
+            type={type}
         >
             <div className="inner">
                 <motion.div className="left">

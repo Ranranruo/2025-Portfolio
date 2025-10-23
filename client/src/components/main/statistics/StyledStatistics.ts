@@ -41,6 +41,7 @@ const StyledStatistics = styled.section<StyledStatisticsProps>`
                         word-wrap: break-word;
                         line-height: 1.5;
                         font-size: 2em;
+                        color: ${COLOR['text01']};
                         > b {
                             font-size: 1em;
                         }
@@ -74,12 +75,16 @@ const StyledStatistics = styled.section<StyledStatisticsProps>`
                         font-weight: 600;
                     }
                     > .title {
+                        color: ${COLOR['text02']};
                         font-size: 1em;
                         font-weight: 400;
                     }
                 }
                 > li:hover {
                     scale: 1.05;
+                    > .title {
+                        color: ${COLOR['text01']};
+                    }
                 }
             }
         }

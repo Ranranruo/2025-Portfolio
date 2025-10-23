@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { COLOR, GAP, GRADIENT_BACKGROUND, INNER, TITLE_SIZE } from "../../../styles/Variable";
+import { BOX_SHADOW, COLOR, CONTENT_SIZE, GAP, GRADIENT_BACKGROUND, INNER, TITLE_SIZE } from "../../../styles/Variable";
 
 const StyledAddProject = styled.section`
     width: 100%;
@@ -13,11 +13,23 @@ const StyledAddProject = styled.section`
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 100px;
+        gap: 50px;
         > .title {
-            font-size: ${TITLE_SIZE.large};
-            font-family: 'Sb';
-            font-weight: 400;
+        width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1.1em;
+            > h1 {
+                margin-top: 50px;
+                font-size: ${TITLE_SIZE.large};
+                color: ${COLOR['text01']};
+                font-weight: 600;
+            }
+            > p {
+                font-size: ${CONTENT_SIZE.large};
+                color: ${COLOR['text02']};
+            }
         }
         > form {
             width: 100%;
@@ -25,47 +37,63 @@ const StyledAddProject = styled.section`
             flex-direction: column;
             align-items: flex-start;
             gap: 15px;
-            > .device {
-                padding: .4em;
-                border-radius: 5px;
-                background: ${COLOR['white03']};
+            > .container {
                 display: flex;
-                justify-content: flex-start;
-                gap: ${GAP['verysmall']};
-                > label {
-                    background: ${COLOR['white03']};
-                    border-radius: 5px;
-                    padding: 0.5em 1em;
-                }
-                > :not(input:checked) + label:hover {
-                    filter: brightness(.95);
-                }
-                > input:checked + label {
-                    ${GRADIENT_BACKGROUND(1)};
+                flex-direction: column;
+                gap: 30px;
+                width: 100%;
+                padding: 2em;
+                border-radius: 10px;
+                background-color: ${COLOR['back01']};
+                ${BOX_SHADOW};
+                > .texts {
+                    display: flex;
+                    flex-direction: column;
+                    gap: .6em;
+                    > h2 {
+                        font-weight: 400;
+                        font-size: ${TITLE_SIZE.verysmall};
+                    }
+                    > p {
+                        font-size: ${CONTENT_SIZE.small};
+                        color: ${COLOR['text02']};
+                    }
                 }
             }
-            > .title-img {
-                width: 100%;
-                label { 
+            > .device {
+                > ul {
                     display: flex;
-                    width: 100%;
-                    justify-content: center;
-                }
-                img {
-                    background-position: center;
-                    background-repeat: no-repeat;
-                    background-size: cover;
-                    background-color: ${COLOR['white03']};
-                    padding: .5em;
-                    border-radius: 5px;
-                    height: 776px;
-                    transition: .5s;
-                }
-                img.desktop {
-                    aspect-ratio: 16/9;
-                }
-                img.mobile {
-                    aspect-ratio: 9/16;
+                    justify-content: space-between;
+                    gap: 15px;
+                    > li {
+                        cursor: pointer;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        gap: 10px;
+                        border-radius: 5px;
+                        width: 100%;
+                        padding: 1em;
+                        background-color: ${COLOR['back02']};
+                        > svg {
+                            font-size: ${TITLE_SIZE.medium};
+                        }
+                    }
+                    > li:hover {
+                        filter: brightness(.95);
+                    }
+                    > li.active {
+                        ${GRADIENT_BACKGROUND(1)};
+                        >p {
+                            color: ${COLOR['white01']};
+                        }
+                        > svg {
+                            fill: ${COLOR['white01']};
+                            stroke: ${COLOR['white01']};
+                        }
+                            
+                    }
+
                 }
             }
         }

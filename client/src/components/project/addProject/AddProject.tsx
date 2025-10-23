@@ -1,41 +1,35 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import StyledAddProject from "./StyledAddProject";
 import { DEVICE_LIST } from "./Data";
 
 const AddProject = () => {
-    const [currentDevice, setDevice] = useState(DEVICE_LIST[0].name);
-    const changeDevice = (deviceName: string) => setDevice(() => deviceName);
+    const [currentDeviceType, setDeviceType] = useState(DEVICE_LIST[0].name);
+    const changeDeviceType = (deviceType: string) => setDeviceType(()=>deviceType);
     return (
         <StyledAddProject>
             <div className="container">
-                <h1 className="title">New project</h1>
+                <div className="title">
+                    <h1>Add New project</h1>
+                    <p>프로젝트 등록 페이지 (관리자 전용)</p>
+                </div>
                 <form className="container">
-                    <div className="title-img container">
-                        <input id="title-image" type="file" accept="image/*" hidden/>
-                        <label htmlFor="title-image">
-                            <img
-                                className={currentDevice.toLowerCase()}
-                                src="/image/project/add.jpg"
-                                alt=""
-                            />
-                        </label>
-                    </div>
                     <div className="device container">
-                        {DEVICE_LIST.map(device => (
-                            <Fragment key={device.id}>
-                                <input
-                                    type="radio"
-                                    id={"device"+device.id}
-                                    name="device"
-                                    checked={currentDevice == device.name}
-                                    hidden
-                                    onChange={()=>changeDevice(device.name)}
-                                />
-                                <label htmlFor={"device"+device.id}>
-                                    {device.name}
-                                </label>
-                            </Fragment>
-                        ))}
+                        <div className="texts">
+                            <h2>Device Type *</h2>
+                            <p>대표 디바이스 종류 (필수)</p>
+                        </div>
+                        <ul>
+                            {DEVICE_LIST.map((device, index) =>
+                            <li
+                                key={index}
+                                onClick={()=>changeDeviceType(device.name)}
+                                className={currentDeviceType === device.name ? "active" : ""}
+                            >
+                                <device.icon />
+                                <p>{device.name}</p>
+                            </li>
+                            )}
+                        </ul>
                     </div>
                 </form>
             </div>       

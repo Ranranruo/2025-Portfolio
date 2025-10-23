@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { COLOR, CONTENT_SIZE, TITLE_SIZE } from "../styles/Variable";
-import { EM, HEX, PX, SIZE } from "../types/Unit";
+import { EM, PX, SIZE } from "../types/Unit";
 
 const FONT_SIZE = {
   verysmall: CONTENT_SIZE["verysmall"],

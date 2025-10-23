@@ -1,4 +1,4 @@
-import { FcBusinessman, FcOpenedFolder, FcOvertime, FcPicture, FcRules, FcTodoList } from "react-icons/fc";
+import { FcOvertime, FcRules, FcTodoList } from "react-icons/fc";
 
 export const STATISTICS = [
     {

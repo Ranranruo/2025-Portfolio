@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { BOX_SHADOW, COLOR, GRADIENT_BACKGROUND, GRADIENT_TEXT, TITLE_SIZE } from "../../../styles/Variable";
+import { BOX_SHADOW, GRADIENT_TEXT, TITLE_SIZE } from "../../../styles/Variable";
 
 const StyledSlide = styled.section`
         overflow-x: hidden;
@@ -20,7 +20,7 @@ const StyledSlide = styled.section`
             > h2 {
                 font-weight: lighter;
                 font-size: ${TITLE_SIZE['verysmall']};
-                ${GRADIENT_TEXT};
+                ${GRADIENT_TEXT(1)};
             }
 
         }

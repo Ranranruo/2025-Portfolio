@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, HTMLMotionProps } from "framer-motion";
 import { SLIDE } from "./Data";
 import StyledSlide from "./StyledSlide";
 import { useEffect, useRef, useState } from "react";
@@ -48,14 +48,15 @@ const Slide = () => {
                 <ul className="container slide">
                     {slides.map((group, idx) => 
                     <motion.li
+                        key={idx}
                         ref={slideRefs[idx]}
                         initial={{left: 0}}
                         animate={{left: x * -(idx + 3)}}
                         transition={{duration: .1}}
                     >
                         <ul>
-                            {group.map(data => 
-                            <li className={data.isMobile ? "mobile" : ""}>
+                            {group.map((data, idx) => 
+                            <li key={idx} className={data.isMobile ? "mobile" : ""}>
                                 <Link to={"/"}>
                                     {data.image ? <img src={data.image} alt=""/> : ''}
                                 </Link>

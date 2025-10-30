@@ -1,11 +1,23 @@
 import { IconType } from "react-icons";
+import { AiOutlineMobile } from "react-icons/ai";
+import { BsDatabase } from "react-icons/bs";
 import { CiDesktop, CiMobile3 } from "react-icons/ci";
-import { IoTabletLandscapeOutline } from "react-icons/io5";
+import { FaDatabase, FaRegLightbulb } from "react-icons/fa";
+import { GoLightBulb } from "react-icons/go";
+import { HiDevicePhoneMobile, HiOutlineServerStack } from "react-icons/hi2";
+import { IoShareSocialOutline, IoTabletLandscapeOutline } from "react-icons/io5";
+import { MdManageAccounts, MdOutlineManageAccounts } from "react-icons/md";
+import { PiPaintBrushBold } from "react-icons/pi";
 
 export interface Role {
     id: number;
     name: string;
     Icon: IconType;
+}
+
+export interface Skill {
+    id: number;
+    name: string;
 }
 
 export interface Device {
@@ -15,41 +27,45 @@ export interface Device {
     icon: IconType;
 }
 
+export const SKILLS: Skill[] = [
+
+]
+
 export const ROLES: Role[] = [
     {
         id: 1,
         name: "pm",
-        Icon: CiDesktop
+        Icon: MdOutlineManageAccounts
     },
     {
         id: 2,
         name: "dba",
-        Icon: CiDesktop
+        Icon: BsDatabase
     },
     {
         id: 3,
         name: "fe",
-        Icon: CiDesktop
+        Icon: AiOutlineMobile
     },
     {
         id: 4,
         name: "be",
-        Icon: CiDesktop
+        Icon: HiOutlineServerStack
     },
     {
         id: 5,
         name: "designer",
-        Icon: CiDesktop
+        Icon: PiPaintBrushBold
     },
     {
         id: 6,
         name: "marketer",
-        Icon: CiDesktop
+        Icon: IoShareSocialOutline
     },
     {
         id: 7,
         name: "planner",
-        Icon: CiDesktop
+        Icon: GoLightBulb
     }
 ];
 

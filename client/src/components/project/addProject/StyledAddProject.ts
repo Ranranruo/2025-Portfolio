@@ -76,6 +76,20 @@ const StyledAddProject = styled.section`
                     display: flex;
                     flex-direction: column;
                     gap: ${GAP.small};
+                    >.selected-roles {
+                        display: flex;
+                        gap: ${GAP.verysmall};
+                        > li {
+                            cursor: pointer;
+                            ${GRADIENT_BACKGROUND(1)};
+                            color: #fff;
+                            border-radius: 5px;
+                            padding: .5em 1em;
+                        }
+                        > li:hover {
+                            filter: brightness(.95);
+                        }
+                    }
                     >.toggle-show-roles {
                         display: flex;
                         > label {

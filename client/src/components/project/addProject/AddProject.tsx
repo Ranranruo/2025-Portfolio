@@ -43,6 +43,18 @@ const AddProject = () => {
     const changeDevice = (device: Device) => {
         setProjectData(prev=>({...prev, device: device.name}));
     }
+    const addRole = (roleName: string) => {
+        setProjectData(prev=>({
+            ...prev,
+            roles: prev.roles.includes(roleName) ? prev.roles : [...prev.roles, roleName]
+        }));
+    }
+    const removeRole = (roleName: string) => {
+        setProjectData(prev=>({
+            ...prev,
+            roles: prev.roles.filter(role => role !== roleName)
+        }));
+    }
     const addSubImage = (e: ChangeEvent<HTMLInputElement>) => {
         if(e.target.files && e.target.files.length > 0) {
             const filesArray = Array.from(e.target.files);
@@ -105,7 +117,15 @@ const AddProject = () => {
                             <p>프로젝트 역할 (필수)</p>
                         </div>
                         <div className="container">
-                            <ul className="selected">
+                            <ul className="selected-roles">
+                                {projectData.roles.map((roleName, index) => 
+                                <li
+                                    key={index}
+                                    onClick={()=>removeRole(roleName)}
+                                >
+                                    {roleName}
+                                </li>
+                                )}
                             </ul>
                             <div className="toggle-show-roles container">
                                 <input
@@ -121,8 +141,14 @@ const AddProject = () => {
                                 </label>
                             </div>
                             <ul className="roles">
-                                {!showRoles ?  "" : ROLES.map((role, index) =>
-                                <li key={index}>
+                                {!showRoles ?  "" : 
+                                ROLES
+                                    .filter((role)=>!projectData.roles.includes(role.name))
+                                    .map((role, index) =>
+                                <li
+                                    key={index}
+                                    onClick={() => addRole(role.name)}
+                                >
                                     <role.Icon />
                                     <p>{role.name}</p>
                                 </li>)}

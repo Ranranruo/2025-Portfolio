@@ -15,21 +15,12 @@ export interface Role {
     Icon: IconType;
 }
 
-export interface Skill {
-    id: number;
-    name: string;
-}
-
 export interface Device {
     id: number;
     name: string;
     aspectRatio: string;
     icon: IconType;
 }
-
-export const SKILLS: Skill[] = [
-
-]
 
 export const ROLES: Role[] = [
     {

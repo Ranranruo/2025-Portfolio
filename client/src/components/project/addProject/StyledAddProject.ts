@@ -130,6 +130,69 @@ const StyledAddProject = styled.section`
                     }
                 }
             }
+            > .skills {
+                > .container {
+                    display: flex;
+                    flex-direction: column;
+                    gap: ${GAP.small};
+                    >.selected-skills {
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: ${GAP.verysmall};
+                        > li {
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            cursor: pointer;
+                            ${GRADIENT_BACKGROUND(1)};
+                            color: #fff;
+                            border-radius: 5px;
+                            padding: .5em 1em;
+                        }
+                        > li:hover {
+                            filter: brightness(.95);
+                        }
+                    }
+                    >.toggle-show-skills {
+                        display: flex;
+                        > label {
+                            color: ${COLOR['text02']};
+                            display: flex;
+                            cursor: pointer;
+                            align-items: center;
+                            gap: 10px;
+                            font-size: ${CONTENT_SIZE.small};
+                            > span {
+                                font-size: ${CONTENT_SIZE.small};
+                                transition: .2s;
+                            }
+                        }
+                        > input:checked + label > span {
+                            transform: rotate(-90deg);
+                        }
+                    }
+                    >.skills {
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: ${GAP.small};
+                        > li {
+                            padding: .5em 1em;
+                            background-color: ${COLOR['back02']};
+                            display: flex;
+                            align-items: center;
+                            border-radius: 5px;
+                            gap: 5px;
+                            cursor: pointer;
+                            > svg {
+                                font-size: ${CONTENT_SIZE.huge};
+                            }
+                        }
+                        > li:hover {
+                            filter: brightness(.95);
+                        }
+                    }
+                }
+            }
             > .device {
                 > .container {
                     display: flex;
@@ -275,6 +338,18 @@ const StyledAddProject = styled.section`
                     }
                     
                     }
+                }
+            }
+            > .submit {
+                > button {
+                    ${GRADIENT_BACKGROUND(1)};
+                    padding: 1em;
+                    color: #fff;
+                    border-radius: 5px;
+                    cursor: pointer;
+                }
+                > button:hover {
+                    filter: brightness(.95);
                 }
             }
         }

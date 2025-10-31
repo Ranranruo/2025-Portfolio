@@ -1,36 +1,38 @@
 import styled from "@emotion/styled";
 
-type SkillNames = 'html' 
-| 'css' 
-| 'javascript' 
-| 'typescript' 
-| 'java' 
-| 'python' 
-| 'php'
-| 'c'
-| 'svelte'
-| 'react' 
-| 'electron'
-| 'lynx'
-| 'threejs' 
-| 'nodejs' 
-| 'express'
-| 'laravel'
-| 'springboot'
-| 'fastapi'
-| 'flask'
-| 'mysql'
-| 'mongodb'
-| 'postgresql'
-| 'firebase'
-| 'superbase'
-| 'redis'
-| 'azure'
-| 'docker'
+export const SKILLS = ['html' 
+,'css' 
+,'javascript' 
+,'typescript' 
+,'java' 
+,'python' 
+,'php'
+,'c'
+,'svelte'
+,'react' 
+,'electron'
+,'lynx'
+,'threejs' 
+,'nodejs' 
+,'express'
+,'laravel'
+,'springboot'
+,'fastapi'
+,'flask'
+,'mysql'
+,'mongodb'
+,'postgresql'
+,'firebase'
+,'supabase'
+,'redis'
+,'azure'
+,'docker',
+,'figma'
+,'github'] as const;
 
 
 interface SkillProps {
-    name: SkillNames;
+    name: typeof SKILLS[number];
     theme: 'light' | 'dark';
     size: number;
 }
@@ -40,7 +42,9 @@ interface StyledSkillProps {
 }
 
 const StyledSkill = styled.img<StyledSkillProps>`
-    
+    width: ${(props) => props.size}px;
+    background-size: cover;
+    background-position: center;
 `;
 
 const Skill = ({
@@ -50,7 +54,7 @@ const Skill = ({
 }: SkillProps) => {
     return (
         <StyledSkill
-            src={`image/skill/${name}.png`}
+            src={`/image/skill/${name}.png`}
             size={size}
         />
     )

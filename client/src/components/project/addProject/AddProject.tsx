@@ -5,20 +5,24 @@ import { FaCloudUploadAlt } from "react-icons/fa";
 import { LuFiles } from "react-icons/lu";
 import { CiCirclePlus } from "react-icons/ci";
 import { MdDeleteForever, MdOutlineArrowBackIos } from "react-icons/md";
+import Skill, { SKILLS } from "../../Skill";
+import { supabase } from "../../../db/Supabase";
 
+type Skills = typeof SKILLS[number];
 interface AddProjectRequest {
     title: string;
     description: string;
     roles: string[];
+    skills: Skills[];
     device: string;
     titleImage: File | null;
     subImages: File[];
 }
-
 const initialProjectData: AddProjectRequest = {
     title: "",
     description: "",
     roles: [],
+    skills: [],
     device: DEVICES[0].name,
     titleImage: null,
     subImages: []
@@ -27,9 +31,75 @@ const initialProjectData: AddProjectRequest = {
 const AddProject = () => {
     const [projectData, setProjectData] = useState<AddProjectRequest>(initialProjectData);
     const [showRoles, setRolesVisible] = useState(false);
+    const [showSkills, setSkillsVisible] = useState(false);
 
     const currentDevice = DEVICES.find(device => device.name === projectData.device) || DEVICES[0];
     const titleImageUrl = projectData.titleImage ? URL.createObjectURL(projectData.titleImage) : "";
+
+    const addProject = async () => {
+        
+        if(projectData.title.replaceAll(" ", "") === "") 
+            return alert("Title is required.");
+        if(projectData.roles.length === 0)
+            return alert("At least one role is required.");
+        if(projectData.skills.length === 0)
+            return alert("At least one skill is required.");
+        if(!projectData.titleImage)
+            return alert("Title image is required.");
+
+        await supabase.auth.signInWithPassword({
+            email: localStorage.getItem("email") ?? "",
+            password: localStorage.getItem("password") ?? ""
+        });
+
+        const titleImageUrl = `title-images/${crypto.randomUUID()}.png`;
+        const { data, error} = await supabase.storage
+            .from('projects')
+            .upload(titleImageUrl, projectData.titleImage)
+        if(error) {
+            console.log(error);
+            return alert("Failed to upload title image.");
+        }
+        const {data: publicData} = supabase.storage
+            .from('projects')
+            .getPublicUrl(data.path);
+        const titleImageUploadUrl = publicData.publicUrl;
+        let subImageUploadUrl: string[] = [];
+        for(const subImage of projectData.subImages) {
+            const subImageUrl = `sub-images/${crypto.randomUUID()}.png`;
+            const {data, error} = await supabase.storage
+                .from('projects')
+                .upload(subImageUrl, subImage)
+            if(error) {
+                console.log(error);
+                return alert("Failed to upload sub images.");
+            }
+            const {data: publicData} = supabase.storage
+                .from('projects')
+                .getPublicUrl(data.path);
+            subImageUploadUrl.push(publicData.publicUrl);
+        }
+
+        supabase
+            .from('project')
+            .insert({
+                title: projectData.title,
+                description: projectData.description,
+                roles: projectData.roles,
+                skills: projectData.skills,
+                device: projectData.device,
+                titleImage: titleImageUploadUrl,
+                subImages: subImageUploadUrl,
+            })
+            .then(({data, error}) => {
+                if(error) {
+                    console.log(error);
+                    return alert("Failed to add project.");
+                }
+                alert("Project added successfully.");
+                setProjectData(initialProjectData);
+            });
+    }
 
     const inputTitle = (e: ChangeEvent<HTMLInputElement>) => {
         setProjectData(prev=>({...prev, title: e.target.value}));
@@ -53,6 +123,21 @@ const AddProject = () => {
         setProjectData(prev=>({
             ...prev,
             roles: prev.roles.filter(role => role !== roleName)
+        }));
+    }
+    const toggleShowSkills = () => {
+        setSkillsVisible(prev=>!prev);
+    }
+    const addSkill = (skillName: Skills) => {
+        setProjectData(prev=>({
+            ...prev,
+            skills: prev.skills.includes(skillName) ? prev.skills : [...prev.skills, skillName]
+        }));
+    }
+    const removeSkill = (skillName: Skills) => {
+        setProjectData(prev=>({
+            ...prev,
+            skills: prev.skills.filter(skill => skill !== skillName)
         }));
     }
     const addSubImage = (e: ChangeEvent<HTMLInputElement>) => {
@@ -155,6 +240,57 @@ const AddProject = () => {
                             </ul>
                         </div>
                     </div>
+                    <div className="skills container">
+                        <div className="texts">
+                            <h2>Skills *</h2>
+                            <p>프로젝트 기술 (필수)</p>
+                        </div>
+                        <div className="container">
+                            <ul className="selected-skills">
+                                {projectData.skills.map((skillName, index) => 
+                                <li
+                                    key={index}
+                                    onClick={()=>removeSkill(skillName)}
+                                >
+                                    <Skill
+                                        name={skillName}
+                                        theme="light"
+                                        size={30}
+                                    />
+                                </li>
+                                )}
+                            </ul>
+                            <div className="toggle-show-skills container">
+                                <input
+                                    type="checkbox"
+                                    onChange={toggleShowSkills}
+                                    id="toggle-show-skills"
+                                    hidden
+                                    checked={showSkills}
+                                    />
+                                <label htmlFor="toggle-show-skills">
+                                    {showRoles ? "접기" : "펼치기"}
+                                    <span>&lt;</span>
+                                </label>
+                            </div>
+                            <ul className="skills">
+                                {!showSkills ?  "" : 
+                                SKILLS
+                                    .filter((skill)=>!projectData.skills.includes(skill))
+                                    .map((skill, index) =>
+                                <li
+                                    key={index}
+                                    onClick={() => addSkill(skill)}
+                                >
+                                    <Skill
+                                        name={skill}
+                                        theme="light"
+                                        size={30}
+                                    />
+                                </li>)}
+                            </ul>
+                        </div>
+                    </div>
                     <div className="device container">
                         <div className="texts">
                             <h2>Device Type *</h2>
@@ -243,6 +379,9 @@ const AddProject = () => {
                             })}
                             </ul>
                         </div>
+                    </div>
+                    <div className="submit container">
+                        <button type="button" onClick={addProject}>프로젝트 추가</button>
                     </div>
                 </form>
             </div>       

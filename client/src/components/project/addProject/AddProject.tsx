@@ -12,20 +12,31 @@ type Skills = typeof SKILLS[number];
 interface AddProjectRequest {
     title: string;
     description: string;
+    details: string;
     roles: string[];
     skills: Skills[];
     device: string;
     titleImage: File | null;
     subImages: File[];
+    pageImages: {
+        name: string,
+        file: File
+    }[],
+    githubUrl: string,
+    deployUrl: string
 }
 const initialProjectData: AddProjectRequest = {
     title: "",
     description: "",
+    details: "",
     roles: [],
     skills: [],
     device: DEVICES[0].name,
     titleImage: null,
-    subImages: []
+    subImages: [],
+    pageImages: [],
+    githubUrl: "",
+    deployUrl: ""
 };
 
 const AddProject = () => {
@@ -79,6 +90,21 @@ const AddProject = () => {
                 .getPublicUrl(data.path);
             subImageUploadUrl.push(publicData.publicUrl);
         }
+        const pageImages = [];
+        for(const pageImage of projectData.pageImages) {
+            const subImageUrl = `page-images/${crypto.randomUUID()}.png`;
+            const {data, error} = await supabase.storage
+                .from('projects')
+                .upload(subImageUrl, pageImage.file)
+            if(error) {
+                console.log(error);
+                return alert("Failed to upload page images.");
+            }
+            const {data: publicData} = supabase.storage
+                .from('projects')
+                .getPublicUrl(data.path);
+            pageImages.push({name: pageImage.name, url: publicData.publicUrl});
+        }
 
         supabase
             .from('project')
@@ -90,6 +116,9 @@ const AddProject = () => {
                 device: projectData.device,
                 titleImage: titleImageUploadUrl,
                 subImages: subImageUploadUrl,
+                pageImages: pageImages,
+                githubUrl: projectData.githubUrl,
+                deployUrl: projectData.deployUrl
             })
             .then(({data, error}) => {
                 if(error) {
@@ -106,6 +135,9 @@ const AddProject = () => {
     }
     const inputDescription = (e: ChangeEvent<HTMLInputElement>) => {
         setProjectData(prev=>({...prev, description: e.target.value}));
+    }
+    const inputDetails = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        setProjectData(prev=>({...prev, details: e.target.value}));
     }
     const toggleShowRoles = () => {
         setRolesVisible(prev=>!prev);
@@ -140,16 +172,16 @@ const AddProject = () => {
             skills: prev.skills.filter(skill => skill !== skillName)
         }));
     }
-    const addSubImage = (e: ChangeEvent<HTMLInputElement>) => {
-        if(e.target.files && e.target.files.length > 0) {
-            const filesArray = Array.from(e.target.files);
-            setProjectData(prev=>({...prev, subImages: [...prev.subImages, ...filesArray]})); 
-        }
-    }
     const changeTitleImage = (e: ChangeEvent<HTMLInputElement>) => {
         if(e.target.files && e.target.files.length > 0) {
             const file = e.target.files[0];
             setProjectData(prev=>({...prev, titleImage: file})); 
+        }
+    }
+    const addSubImage = (e: ChangeEvent<HTMLInputElement>) => {
+        if(e.target.files && e.target.files.length > 0) {
+            const filesArray = Array.from(e.target.files);
+            setProjectData(prev=>({...prev, subImages: [...prev.subImages, ...filesArray]})); 
         }
     }
     const removeSubImage = (index: number) => {
@@ -157,6 +189,26 @@ const AddProject = () => {
             ...prev,
             subImages: prev.subImages.filter((_, i) => i !== index)
         }));
+    }
+    const addPageImage = (e: ChangeEvent<HTMLInputElement>) => {
+        if(e.target.files && e.target.files.length > 0) {
+            const file = e.target.files[0];
+            const pageName = prompt("input page name");
+            if(!pageName) return alert("page name require");
+            setProjectData(prev=>({...prev, pageImages: [...prev.pageImages, {name: pageName, file: file}]})); 
+        }
+    }
+     const removePageImage = (index: number) => {
+        setProjectData(prev=>({
+            ...prev,
+            pageImages: prev.pageImages.filter((_, i) => i !== index)
+        }));
+    }
+    const inputGithubUrl = (e: ChangeEvent<HTMLInputElement>) => {
+        setProjectData(prev=>({...prev, githubUrl: e.target.value}));
+    }
+    const inputDeployUrl = (e: ChangeEvent<HTMLInputElement>) => {
+        setProjectData(prev=>({...prev, deployUrl: e.target.value}));
     }
     return (
         <StyledAddProject>
@@ -178,6 +230,7 @@ const AddProject = () => {
                                 id="title"
                                 placeholder="Input here"
                                 onInput={inputTitle}
+                                value={projectData.title}
                             />
                         </div>
                     </div>
@@ -193,7 +246,24 @@ const AddProject = () => {
                                 id="description"
                                 placeholder="Input here"
                                 onInput={inputDescription}
+                                value={projectData.description}
                             />
+                        </div>
+                    </div>
+                    <div className="details container">
+                        <div className="texts">
+                            <h2>Details</h2>
+                            <p>세부 사항 (선택)</p>
+                        </div>
+                        <div className="container">
+                            <textarea
+                                name="details"
+                                id="details"
+                                placeholder="Input here"
+                                onInput={inputDetails}
+                            >
+                                {projectData.details}
+                            </textarea>
                         </div>
                     </div>
                     <div className="role container">
@@ -378,6 +448,73 @@ const AddProject = () => {
                                 );
                             })}
                             </ul>
+                        </div>
+                    </div>
+                    <div className="page-image container">
+                        <div className="texts">
+                            <h2>page Images</h2>
+                            <p>프로젝트 서브 이미지 (16:9)</p>
+                            <input
+                                type="file"
+                                id="page-image"
+                                name="page-image"
+                                accept="image/*"
+                                multiple
+                                hidden
+                                onChange={addPageImage}
+                            />
+                        </div>
+                        <div className="container">
+                            <label htmlFor="page-image"><CiCirclePlus /></label>
+                            <ul>
+                            {projectData.pageImages.map((page, index) => {
+                                const imageUrl = URL.createObjectURL(page.file);
+                                return (
+                                    <li
+                                    key={index}
+                                    style={{backgroundImage: `url(${imageUrl})`}}
+                                    onClick={() => removePageImage(index)}
+                                    >
+                                        <p className="page-name">{page.name}</p>
+                                        <div className="close">
+                                            <MdDeleteForever />
+                                        </div>
+                                    </li>
+                                );
+                            })}
+                            </ul>
+                        </div>
+                    </div>
+                    <div className="github container">
+                        <div className="texts">
+                            <h2>Github </h2>
+                            <p>깃허브 주소</p>
+                        </div>
+                        <div className="container">
+                            <input
+                                type="text"
+                                name="github"
+                                id="github"
+                                placeholder="Input here"
+                                onInput={inputGithubUrl}
+                                value={projectData.githubUrl}
+                            />
+                        </div>
+                    </div>
+                    <div className="deploy container">
+                        <div className="texts">
+                            <h2>Deploy</h2>
+                            <p>배포 주소</p>
+                        </div>
+                        <div className="container">
+                            <input
+                                type="text"
+                                name="deploy"
+                                id="deploy"
+                                placeholder="Input here"
+                                onInput={inputDeployUrl}
+                                value={projectData.deployUrl}
+                            />
                         </div>
                     </div>
                     <div className="submit container">

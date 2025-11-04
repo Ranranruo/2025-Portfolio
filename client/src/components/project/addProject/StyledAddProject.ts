@@ -71,6 +71,19 @@ const StyledAddProject = styled.section`
                     }
                 }
             }
+             > .details {
+                > .container {
+                    width: 100%;
+                    > textarea {
+                        font-size: ${CONTENT_SIZE.medium};
+                        width: 100%; 
+                        height: 200px;
+                        padding: 1em;
+                        background-color: ${COLOR['back02']};
+                        resize: none;
+                    }
+                }
+            }
             > .role {
                 > .container {
                     display: flex;
@@ -337,6 +350,86 @@ const StyledAddProject = styled.section`
                         opacity: 1;
                     }
                     
+                    }
+                }
+            }
+             > .page-image {
+                > .container {
+                    overflow-x: scroll;
+                    display: flex;
+                    gap: 15px;
+                    > label, > ul >li {
+                        display: flex;
+                        border: 3px solid ${COLOR['back03']};
+                        border-radius: 10px;
+                        height: 200px;
+                    }
+                    > label {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        aspect-ratio: 1/1;
+                        background-color: ${COLOR['back02']};
+                        svg {
+                            font-size: 60px;
+                            stroke: ${COLOR['text02']};
+                        }
+                    }
+                    > label:hover {
+                        filter: brightness(.95);
+                    }
+                    > ul {
+                    display: flex;
+                    gap: 15px;
+                    > li {
+                        aspect-ratio: 16/9;
+                        cursor: pointer;
+                        background-position: center;
+                        background-repeat: no-repeat;
+                        background-size: cover;
+                        overflow: hidden;
+                        position: relative;
+                        display: flex;
+                        justify-content: center;
+                        .page-name {
+                            padding-top: 10px;
+                        }
+                        > .close {
+                            top: 0;
+                            left: 0;
+                            position: absolute;
+                            transition: .2s;
+                            opacity: 0;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            width: 100%;
+                            height: 100%;
+                            background-color: rgba(255, 255, 255, .8);
+                            > svg {
+                                font-size: 70px;
+                                fill: ${COLOR['main01']};
+                                padding: 10px;
+                                border-radius: 100%;
+                                background-color: rgba(254, 193, 100, .15);
+                            }
+                        }
+                    }
+                    > li:hover > .close {
+                        opacity: 1;
+                    }
+                    
+                    }
+                }
+            }
+             > .github, > .deploy {
+                > .container {
+                    width: 100%;
+                    > input {
+                        font-size: ${CONTENT_SIZE.medium};
+                        width: 100%; 
+                        padding: 1em;
+                        background-color: ${COLOR['back02']};
                     }
                 }
             }

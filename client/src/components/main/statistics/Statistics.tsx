@@ -1,9 +1,18 @@
 import useFlexWrap from "../../../hooks/useFlexWrap";
 import StyledAboutMe from "./StyledStatistics";
 import { STATISTICS } from "./Data";
+import useProjectApi from "../../../api/ProjectApi";
+import { useEffect, useState } from "react";
 
 const Statistics = () => {
     const {isWrapped, containerRef} = useFlexWrap();
+    const getProjectsCount = useProjectApi((state)=>state.getProjectsCount);
+
+    const [projectsCount, setProjectsCount] = useState(0);
+    
+    useEffect(()=>{
+        getProjectsCount().then(count=> setProjectsCount(()=>count));
+    },[]);
     return (
         <StyledAboutMe
             isWrapped={isWrapped}

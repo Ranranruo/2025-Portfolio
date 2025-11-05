@@ -30,6 +30,7 @@ export const SKILLS = ['html'
 ,'figma'
 ,'github'] as const;
 
+export type Skills = typeof SKILLS[number];
 
 interface SkillProps {
     name: typeof SKILLS[number];

@@ -7,25 +7,12 @@ import { CiCirclePlus } from "react-icons/ci";
 import { MdDeleteForever, MdOutlineArrowBackIos } from "react-icons/md";
 import Skill, { SKILLS } from "../../Skill";
 import { supabase } from "../../../db/Supabase";
+import useProjectApi from "../../../api/ProjectApi";
+import type { AddProject } from "../../../api/ProjectApi";
 
 type Skills = typeof SKILLS[number];
-interface AddProjectRequest {
-    title: string;
-    description: string;
-    details: string;
-    roles: string[];
-    skills: Skills[];
-    device: string;
-    titleImage: File | null;
-    subImages: File[];
-    pageImages: {
-        name: string,
-        file: File
-    }[],
-    githubUrl: string,
-    deployUrl: string
-}
-const initialProjectData: AddProjectRequest = {
+
+const initialProjectData: AddProject = {
     title: "",
     description: "",
     details: "",
@@ -40,7 +27,9 @@ const initialProjectData: AddProjectRequest = {
 };
 
 const AddProject = () => {
-    const [projectData, setProjectData] = useState<AddProjectRequest>(initialProjectData);
+    const createProject = useProjectApi((state)=>state.addProject)
+
+    const [projectData, setProjectData] = useState<AddProject>(initialProjectData);
     const [showRoles, setRolesVisible] = useState(false);
     const [showSkills, setSkillsVisible] = useState(false);
 
@@ -58,76 +47,10 @@ const AddProject = () => {
         if(!projectData.titleImage)
             return alert("Title image is required.");
 
-        await supabase.auth.signInWithPassword({
-            email: localStorage.getItem("email") ?? "",
-            password: localStorage.getItem("password") ?? ""
-        });
-
-        const titleImageUrl = `title-images/${crypto.randomUUID()}.png`;
-        const { data, error} = await supabase.storage
-            .from('projects')
-            .upload(titleImageUrl, projectData.titleImage)
-        if(error) {
-            console.log(error);
-            return alert("Failed to upload title image.");
-        }
-        const {data: publicData} = supabase.storage
-            .from('projects')
-            .getPublicUrl(data.path);
-        const titleImageUploadUrl = publicData.publicUrl;
-        let subImageUploadUrl: string[] = [];
-        for(const subImage of projectData.subImages) {
-            const subImageUrl = `sub-images/${crypto.randomUUID()}.png`;
-            const {data, error} = await supabase.storage
-                .from('projects')
-                .upload(subImageUrl, subImage)
-            if(error) {
-                console.log(error);
-                return alert("Failed to upload sub images.");
-            }
-            const {data: publicData} = supabase.storage
-                .from('projects')
-                .getPublicUrl(data.path);
-            subImageUploadUrl.push(publicData.publicUrl);
-        }
-        const pageImages = [];
-        for(const pageImage of projectData.pageImages) {
-            const subImageUrl = `page-images/${crypto.randomUUID()}.png`;
-            const {data, error} = await supabase.storage
-                .from('projects')
-                .upload(subImageUrl, pageImage.file)
-            if(error) {
-                console.log(error);
-                return alert("Failed to upload page images.");
-            }
-            const {data: publicData} = supabase.storage
-                .from('projects')
-                .getPublicUrl(data.path);
-            pageImages.push({name: pageImage.name, url: publicData.publicUrl});
-        }
-
-        supabase
-            .from('project')
-            .insert({
-                title: projectData.title,
-                description: projectData.description,
-                roles: projectData.roles,
-                skills: projectData.skills,
-                device: projectData.device,
-                titleImage: titleImageUploadUrl,
-                subImages: subImageUploadUrl,
-                pageImages: pageImages,
-                githubUrl: projectData.githubUrl,
-                deployUrl: projectData.deployUrl
-            })
-            .then(({data, error}) => {
-                if(error) {
-                    console.log(error);
-                    return alert("Failed to add project.");
-                }
-                alert("Project added successfully.");
-                setProjectData(initialProjectData);
-            });
+        const ok = await createProject(projectData);
+        if(ok) alert("Project added successfully.");
+        else alert("Failed to add project.");
+        setProjectData(initialProjectData);
     }
 
     const inputTitle = (e: ChangeEvent<HTMLInputElement>) => {

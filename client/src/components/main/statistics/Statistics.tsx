@@ -11,7 +11,7 @@ const Statistics = () => {
     const [projectsCount, setProjectsCount] = useState(0);
     
     useEffect(()=>{
-        getProjectsCount().then(count=> setProjectsCount(()=>count));
+        getProjectsCount().then(count=> STATISTICS[0].content = count);
     },[]);
     return (
         <StyledAboutMe

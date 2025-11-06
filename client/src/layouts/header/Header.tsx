@@ -21,7 +21,7 @@ const Header = ({
                 <div className="right">
                     <ul className="menu">
                         <li><Link to="#">About Me</Link></li>
-                        <li><Link to="#">Project</Link></li>
+                        <li><Link to="/projects">Projects</Link></li>
                         <li><Link to="#">Skills</Link></li>
                         <li><Link to="#">Contact</Link></li>
                     </ul>
